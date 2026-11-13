@@ -1,0 +1,9 @@
+--- a/src/main/java/br/com/horacerta/apuracao/dtos/ApuracaoResponse.java
++++ b/src/main/java/br/com/horacerta/apuracao/dtos/ApuracaoResponse.java
+@@ -7,5 +7,5 @@
+         String competencia,
+         BigDecimal horasTrabalhadas,
+         BigDecimal horasExtras,
+-        int diasComputaveis,
++        int diasTrabalhados,
+         SindicatoResponse sindicato) {}

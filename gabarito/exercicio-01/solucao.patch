@@ -1,0 +1,30 @@
+--- a/src/main/java/br/com/horacerta/apuracao/dtos/ApuracaoResponse.java
++++ b/src/main/java/br/com/horacerta/apuracao/dtos/ApuracaoResponse.java
+@@ -7,4 +7,5 @@
+         String competencia,
+         BigDecimal horasTrabalhadas,
+         BigDecimal horasExtras,
+-        int diasTrabalhados) {}
++        int diasTrabalhados,
++        SindicatoResponse sindicato) {}
+--- a/src/main/java/br/com/horacerta/apuracao/resources/ApuracaoResource.java
++++ b/src/main/java/br/com/horacerta/apuracao/resources/ApuracaoResource.java
+@@ -4,6 +4,7 @@
+ import java.time.format.DateTimeParseException;
+ 
+ import br.com.horacerta.apuracao.dtos.ApuracaoResponse;
++import br.com.horacerta.apuracao.dtos.SindicatoResponse;
+ import br.com.horacerta.apuracao.entities.ApuracaoMensal;
+ import br.com.horacerta.apuracao.services.ApuracaoService;
+ import br.com.horacerta.apuracao.services.CalculoMensal;
+@@ -46,8 +47,9 @@
+     }
+ 
+     private static ApuracaoResponse resposta(ApuracaoMensal a) {
++        var sindicato = a.sindicatoCodigo == null ? null : new SindicatoResponse(a.sindicatoCodigo);
+         return new ApuracaoResponse(a.funcionarioId, a.competencia,
+                 CalculoMensal.horas(a.minutosTrabalhados), CalculoMensal.horas(a.minutosExtras),
+-                a.diasTrabalhados);
++                a.diasTrabalhados, sindicato);
+     }
+ }

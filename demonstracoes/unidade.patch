@@ -1,0 +1,11 @@
+--- a/src/main/java/br/com/horacerta/apuracao/resources/ApuracaoResource.java
++++ b/src/main/java/br/com/horacerta/apuracao/resources/ApuracaoResource.java
+@@ -49,7 +49,7 @@
+     private static ApuracaoResponse resposta(ApuracaoMensal a) {
+         var sindicato = a.sindicatoCodigo == null ? null : new SindicatoResponse(a.sindicatoCodigo);
+         return new ApuracaoResponse(a.funcionarioId, a.competencia,
+-                CalculoMensal.horas(a.minutosTrabalhados), CalculoMensal.horas(a.minutosExtras),
++                java.math.BigDecimal.valueOf(a.minutosTrabalhados), CalculoMensal.horas(a.minutosExtras),
+                 a.diasTrabalhados, sindicato);
+     }
+ }

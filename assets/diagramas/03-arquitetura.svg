@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="395" viewBox="0 0 1120 395">
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#087e8b"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#152c46}.label{font-size:19px}.small{font-size:17px;fill:#486078}.title{font-size:23px;font-weight:700}.edge{fill:none;stroke:#087e8b;stroke-width:2.5;marker-end:url(#a)}</style>
+<rect x="15" y="125" width="245" height="105" rx="5" fill="#e7f3f4" stroke="#aec4ce"/>
+<text class="title" x="137.5" y="172.5" text-anchor="middle">Resource</text>
+<text class="small" x="137.5" y="213" text-anchor="middle">HTTP e status</text>
+<rect x="415" y="125" width="245" height="105" rx="5" fill="#e7f3f4" stroke="#aec4ce"/>
+<text class="title" x="537.5" y="172.5" text-anchor="middle">Service</text>
+<text class="small" x="537.5" y="213" text-anchor="middle">consulta e cálculo</text>
+<rect x="815" y="125" width="290" height="105" rx="5" fill="#e7f3f4" stroke="#aec4ce"/>
+<text class="title" x="960.0" y="172.5" text-anchor="middle">Entity Panache</text>
+<text class="small" x="960.0" y="213" text-anchor="middle">persistência</text>
+<path class="edge" d="M260 175 H415"/>
+<text class="label" x="338" y="156" text-anchor="middle">chama</text>
+<path class="edge" d="M660 175 H815"/>
+<text class="label" x="738" y="156" text-anchor="middle">consulta</text>
+<text class="title" x="15" y="50">DTO define a resposta pública</text>
+<text class="label" x="15" y="330">A entidade pode mudar. O DTO preserva o contrato que os consumers utilizam.</text>
+</svg>

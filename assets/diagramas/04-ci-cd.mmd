@@ -1,0 +1,9 @@
+flowchart TB
+  C["Consumer testa e publica"] --> B["Broker: matriz de versões"]
+  P["Provider verifica e publica resultado"] --> B
+  B --> G1["Gate consumer"]
+  B --> G2["Gate provider"]
+  G1 -->|compatível| D1["Deploy consumer e registro"]
+  G2 -->|compatível| D2["Deploy provider e registro"]
+  G1 -->|falha ou desconhecido| X["Bloqueio"]
+  G2 -->|falha ou desconhecido| X

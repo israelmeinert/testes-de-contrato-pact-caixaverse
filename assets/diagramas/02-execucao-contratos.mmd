@@ -1,0 +1,10 @@
+flowchart TB
+  subgraph C["Repositório do consumer"]
+    T["Teste do client real"] -->|HTTP| M["Mock Pact"]
+    M -->|gera| J["Contrato JSON"]
+  end
+  subgraph P["Repositório do provider"]
+    V["Verificador Pact"] -->|HTTP| A["Quarkus real"]
+  end
+  J -. "arquivo ou Broker" .-> V
+  A -->|resposta real| V

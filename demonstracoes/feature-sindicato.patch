@@ -1,0 +1,34 @@
+--- a/src/main/java/br/com/horacerta/ferias/dtos/ApuracaoClienteDto.java
++++ b/src/main/java/br/com/horacerta/ferias/dtos/ApuracaoClienteDto.java
+@@ -6,7 +6,10 @@
+ public record ApuracaoClienteDto(
+         String funcionarioId,
+         String competencia,
+-        Integer diasTrabalhados) {
++        Integer diasTrabalhados,
++        Sindicato sindicato) {
++    public record Sindicato(String codigo) {}
++
+     public ApuracaoClienteDto {
+         if (funcionarioId == null || funcionarioId.isBlank() || competencia == null || competencia.isBlank()
+                 || diasTrabalhados == null) {
+--- a/src/test/java/br/com/horacerta/ferias/ModuloFeriasPactTest.java
++++ b/src/test/java/br/com/horacerta/ferias/ModuloFeriasPactTest.java
+@@ -28,7 +28,8 @@
+         var body = new PactDslJsonBody()
+                 .stringValue("funcionarioId", "F001")
+                 .stringValue("competencia", "2026-10")
+-                .integerType("diasTrabalhados", 20);
++                .integerType("diasTrabalhados", 20)
++                .object("sindicato").stringValue("codigo", "SIND-TI").closeObject();
+         return builder.given("F001 apurado em 2026-10")
+                 .uponReceiving("consulta mensal de modulo-ferias")
+                 .method("GET").path("/apuracoes/F001/2026-10")
+@@ -55,6 +56,7 @@
+         assertEquals("F001", resultado.funcionarioId());
+         assertEquals("2026-10", resultado.competencia());
+         assertEquals(20, resultado.diasTrabalhados());
++        assertEquals("SIND-TI", resultado.sindicato().codigo());
+     }
+ 
+     @Test

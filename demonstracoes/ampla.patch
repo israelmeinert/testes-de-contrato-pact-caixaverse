@@ -1,0 +1,41 @@
+--- a/src/main/java/br/com/horacerta/apuracao/dtos/ApuracaoResponse.java
++++ b/src/main/java/br/com/horacerta/apuracao/dtos/ApuracaoResponse.java
+@@ -1,11 +1,10 @@
+ package br.com.horacerta.apuracao.dtos;
+ 
+-import java.math.BigDecimal;
+-
+ public record ApuracaoResponse(
+-        String funcionarioId,
++        String colaboradorId,
+         String competencia,
+-        BigDecimal horasTrabalhadas,
+-        BigDecimal horasExtras,
+-        int diasTrabalhados,
+-        SindicatoResponse sindicato) {}
++        SindicatoResponse sindicato,
++        Jornada jornada,
++        int diasComputaveis) {
++    public record Jornada(long minutosTrabalhados, long minutosExtras) {}
++}
+--- a/src/main/java/br/com/horacerta/apuracao/resources/ApuracaoResource.java
++++ b/src/main/java/br/com/horacerta/apuracao/resources/ApuracaoResource.java
+@@ -7,7 +7,6 @@
+ import br.com.horacerta.apuracao.dtos.SindicatoResponse;
+ import br.com.horacerta.apuracao.entities.ApuracaoMensal;
+ import br.com.horacerta.apuracao.services.ApuracaoService;
+-import br.com.horacerta.apuracao.services.CalculoMensal;
+ import jakarta.inject.Inject;
+ import jakarta.ws.rs.BadRequestException;
+ import jakarta.ws.rs.GET;
+@@ -48,8 +47,7 @@
+ 
+     private static ApuracaoResponse resposta(ApuracaoMensal a) {
+         var sindicato = a.sindicatoCodigo == null ? null : new SindicatoResponse(a.sindicatoCodigo);
+-        return new ApuracaoResponse(a.funcionarioId, a.competencia,
+-                CalculoMensal.horas(a.minutosTrabalhados), CalculoMensal.horas(a.minutosExtras),
+-                a.diasTrabalhados, sindicato);
++        return new ApuracaoResponse(a.funcionarioId, a.competencia, sindicato,
++                new ApuracaoResponse.Jornada(a.minutosTrabalhados, a.minutosExtras), a.diasTrabalhados);
+     }
+ }

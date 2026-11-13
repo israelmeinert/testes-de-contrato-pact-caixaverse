@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="430" viewBox="0 0 1120 430">
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#087e8b"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#152c46}.label{font-size:19px}.small{font-size:17px;fill:#486078}.title{font-size:23px;font-weight:700}.edge{fill:none;stroke:#087e8b;stroke-width:2.5;marker-end:url(#a)}</style>
+<rect x="15" y="35" width="240" height="90" rx="5" fill="#e7f3f4" stroke="#aec4ce"/>
+<text class="title" x="135.0" y="75.0" text-anchor="middle">Registros de ponto</text>
+<text class="small" x="135.0" y="108" text-anchor="middle">entrada diária</text>
+<rect x="375" y="35" width="310" height="90" rx="5" fill="#e7f3f4" stroke="#aec4ce"/>
+<text class="title" x="530.0" y="75.0" text-anchor="middle">Apuração de horas</text>
+<text class="small" x="530.0" y="108" text-anchor="middle">calcula e publica o resumo</text>
+<rect x="845" y="35" width="250" height="90" rx="5" fill="#e7f3f4" stroke="#aec4ce"/>
+<text class="title" x="970.0" y="75.0" text-anchor="middle">Banco de dados</text>
+<text class="small" x="970.0" y="108" text-anchor="middle">registros e apurações</text>
+<rect x="170" y="295" width="310" height="95" rx="5" fill="#e7f3f4" stroke="#aec4ce"/>
+<text class="title" x="325.0" y="337.5" text-anchor="middle">Integração com cliente</text>
+<text class="small" x="325.0" y="373" text-anchor="middle">exporta horas e extras</text>
+<rect x="660" y="295" width="310" height="95" rx="5" fill="#e7f3f4" stroke="#aec4ce"/>
+<text class="title" x="815.0" y="337.5" text-anchor="middle">Módulo de férias</text>
+<text class="small" x="815.0" y="373" text-anchor="middle">consulta dias trabalhados</text>
+<path class="edge" d="M255 80 H375"/>
+<text class="label" x="315" y="62" text-anchor="middle">dados</text>
+<path class="edge" d="M685 80 H845"/>
+<text class="label" x="765" y="62" text-anchor="middle">persiste</text>
+<path class="edge" d="M325 295 V210 H465 V125"/>
+<text class="label" x="322" y="194" text-anchor="middle">GET resumo</text>
+<path class="edge" d="M815 295 V210 H595 V125"/>
+<text class="label" x="815" y="194" text-anchor="middle">GET resumo</text>
+</svg>

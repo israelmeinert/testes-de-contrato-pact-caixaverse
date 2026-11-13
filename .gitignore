@@ -1,0 +1,6 @@
+.env
+/infra/.env
+/target/
+**/target/
+/local/
+**/src/test/resources/pacts/*.json

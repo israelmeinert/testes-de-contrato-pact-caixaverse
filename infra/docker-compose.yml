@@ -1,0 +1,49 @@
+name: horacerta-broker
+
+services:
+  postgres:
+    image: postgres:17.10-alpine
+    environment:
+      POSTGRES_DB: pact_broker
+      POSTGRES_USER: broker
+      POSTGRES_PASSWORD: ${PACT_DB_PASSWORD:-db-horacerta-demo}
+    volumes:
+      - historico-broker:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "broker", "-d", "pact_broker", "-h", "127.0.0.1"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  broker:
+    image: pactfoundation/pact-broker:2.143.0-pactbroker2.121.0
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${PACT_BROKER_PORT:-19292}:9292"
+    environment:
+      PACT_BROKER_DATABASE_HOST: postgres
+      PACT_BROKER_DATABASE_NAME: pact_broker
+      PACT_BROKER_DATABASE_USERNAME: broker
+      PACT_BROKER_DATABASE_PASSWORD: ${PACT_DB_PASSWORD:-db-horacerta-demo}
+      PACT_BROKER_BASIC_AUTH_USERNAME: ${PACT_BROKER_USERNAME:-professor}
+      PACT_BROKER_BASIC_AUTH_PASSWORD: ${PACT_BROKER_PASSWORD:-horacerta-demo}
+      PACT_BROKER_LOG_LEVEL: INFO
+    healthcheck:
+      test:
+        - CMD
+        - ruby
+        - -rnet/http
+        - -e
+        - >-
+          uri = URI("http://127.0.0.1:9292/diagnostic/status/heartbeat");
+          request = Net::HTTP::Get.new(uri);
+          request.basic_auth(ENV.fetch("PACT_BROKER_BASIC_AUTH_USERNAME"), ENV.fetch("PACT_BROKER_BASIC_AUTH_PASSWORD"));
+          exit(Net::HTTP.start(uri.host, uri.port, open_timeout: 2, read_timeout: 2) { |http| http.request(request) }.is_a?(Net::HTTPSuccess))
+      interval: 2s
+      timeout: 3s
+      retries: 40
+
+volumes:
+  historico-broker:

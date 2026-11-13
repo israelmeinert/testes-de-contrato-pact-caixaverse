@@ -1,0 +1,9 @@
+{
+  "event_type": "horacerta-pacto-publicado",
+  "client_payload": {
+    "consumer": "${pactbroker.consumerName}",
+    "pact_url": "${pactbroker.pactUrl}",
+    "provider_sha": "${pactbroker.providerVersionNumber}",
+    "provider_branch": "${pactbroker.providerVersionBranch}"
+  }
+}

@@ -1,0 +1,32 @@
+name: horacerta-ferramentas
+
+services:
+  java:
+    build:
+      context: .
+      target: java
+    user: "${LAB_UID:-1000}:${LAB_GID:-1000}"
+    working_dir: /aula
+    environment:
+      HOME: /tmp
+      MAVEN_OPTS: "-Dmaven.repo.local=/maven/repository"
+    volumes:
+      - .:/aula
+      - maven-cache:/maven/repository
+    entrypoint: ["/bin/bash"]
+    command: ["./scripts/verificar-local.sh"]
+
+  marp:
+    build:
+      context: .
+      target: slides
+    user: "${LAB_UID:-1000}:${LAB_GID:-1000}"
+    working_dir: /aula
+    environment:
+      HOME: /tmp
+    volumes:
+      - .:/aula
+    entrypoint: ["node"]
+
+volumes:
+  maven-cache:
